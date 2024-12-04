@@ -1,39 +1,72 @@
-import React from 'react';
+import { useState } from 'react';
 import './App.scss';
-import Carousel from './components/Carousel';
+import Carousel from './components/Carousel/Carousel';
+import Form from './components/Form/Form';
 
-interface State {
-  images: string[];
-}
+const App = () => {
+  const [{ step, frameSize, itemWidth, animationDuration }, setCarouselParam] =
+    useState({
+      step: 3,
+      frameSize: 3,
+      itemWidth: 130,
+      animationDuration: 1000,
+    });
 
-class App extends React.Component<{}, State> {
-  state = {
-    images: [
-      './img/1.png',
-      './img/2.png',
-      './img/3.png',
-      './img/4.png',
-      './img/5.png',
-      './img/6.png',
-      './img/7.png',
-      './img/8.png',
-      './img/9.png',
-      './img/10.png',
-    ],
+  const [infinite, setInfinite] = useState(false);
+  const handleFromChange = (newValues: {
+    step?: number;
+    frameSize?: number;
+    itemWidth?: number;
+    animationDuration?: number;
+    infinite?: boolean;
+  }) => {
+    setCarouselParam(prevValue => ({
+      ...prevValue,
+      ...newValues,
+    }));
+
+    if (newValues.hasOwnProperty('infinite')) {
+      setInfinite(newValues.infinite!);
+    }
   };
 
-  render() {
-    const { images } = this.state;
+  const images = [
+    './img/1.png',
+    './img/2.png',
+    './img/3.png',
+    './img/4.png',
+    './img/5.png',
+    './img/6.png',
+    './img/7.png',
+    './img/8.png',
+    './img/9.png',
+    './img/10.png',
+  ];
 
-    return (
-      <div className="App">
-        {/* eslint-disable-next-line */}
-        <h1>Carousel with {images.length} images</h1>
+  return (
+    <div className="App">
+      {/* eslint-disable-next-line */}
+      <h1 data-cy="title">Carousel with {images.length} images</h1>
 
-        <Carousel />
-      </div>
-    );
-  }
-}
+      <Carousel
+        images={images}
+        step={step}
+        frameSize={frameSize}
+        itemWidth={itemWidth}
+        animationDuration={animationDuration}
+        infinite={infinite}
+      />
+
+      <Form
+        onChange={handleFromChange}
+        step={step}
+        frameSize={frameSize}
+        itemWidth={itemWidth}
+        animationDuration={animationDuration}
+        infinite={infinite}
+      />
+    </div>
+  );
+};
 
 export default App;
