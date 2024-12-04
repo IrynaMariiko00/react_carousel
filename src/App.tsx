@@ -45,26 +45,28 @@ const App = () => {
 
   return (
     <div className="App">
-      {/* eslint-disable-next-line */}
-      <h1 data-cy="title">Carousel with {images.length} images</h1>
+      <div className="main__container">
+        {/* eslint-disable-next-line */}
+        <h1 data-cy="title" className="title">Carousel with {images.length} images</h1>
 
-      <Carousel
-        images={images}
-        step={step}
-        frameSize={frameSize}
-        itemWidth={itemWidth}
-        animationDuration={animationDuration}
-        infinite={infinite}
-      />
+        <Carousel
+          images={images}
+          step={step}
+          frameSize={frameSize}
+          itemWidth={itemWidth}
+          animationDuration={animationDuration}
+          infinite={infinite}
+        />
 
-      <Form
-        onChange={handleFromChange}
-        step={step}
-        frameSize={frameSize}
-        itemWidth={itemWidth}
-        animationDuration={animationDuration}
-        infinite={infinite}
-      />
+        <Form
+          onChange={handleFromChange}
+          step={step}
+          frameSize={frameSize}
+          itemWidth={itemWidth}
+          animationDuration={animationDuration}
+          infinite={infinite}
+        />
+      </div>
     </div>
   );
 };
