@@ -4,16 +4,18 @@ import Carousel from './components/Carousel/Carousel';
 import Form from './components/Form/Form';
 
 const App = () => {
-  const [{ step, frameSize, itemWidth, animationDuration }, setCarouselParam] =
-    useState({
-      step: 3,
-      frameSize: 3,
-      itemWidth: 130,
-      animationDuration: 1000,
-    });
+  const [
+    { step, frameSize, itemWidth, animationDuration, infinite },
+    setCarouselParam,
+  ] = useState({
+    step: 3,
+    frameSize: 3,
+    itemWidth: 130,
+    animationDuration: 1000,
+    infinite: false,
+  });
 
-  const [infinite, setInfinite] = useState(false);
-  const handleFromChange = (newValues: {
+  const handleFormChange = (newValues: {
     step?: number;
     frameSize?: number;
     itemWidth?: number;
@@ -24,10 +26,6 @@ const App = () => {
       ...prevValue,
       ...newValues,
     }));
-
-    if (newValues.hasOwnProperty('infinite')) {
-      setInfinite(newValues.infinite!);
-    }
   };
 
   const images = [
@@ -47,7 +45,9 @@ const App = () => {
     <div className="App">
       <div className="main__container">
         {/* eslint-disable-next-line */}
-        <h1 data-cy="title" className="title">Carousel with {images.length} images</h1>
+        <h1 data-cy="title" className="title">
+          Carousel with {images.length} images
+        </h1>
 
         <Carousel
           images={images}
@@ -59,7 +59,7 @@ const App = () => {
         />
 
         <Form
-          onChange={handleFromChange}
+          onChange={handleFormChange}
           step={step}
           frameSize={frameSize}
           itemWidth={itemWidth}
